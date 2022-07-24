@@ -50,3 +50,11 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+.vscode/settings.json
+
+.vscode/
+
+Code/.DS_Store
+
+Code/particle/cell-com/lib/
