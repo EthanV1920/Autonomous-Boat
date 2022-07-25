@@ -58,3 +58,7 @@ dkms.conf
 Code/.DS_Store
 
 Code/particle/cell-com/lib/
+
+gps-website/venv/
+
+gps-website/config.ini

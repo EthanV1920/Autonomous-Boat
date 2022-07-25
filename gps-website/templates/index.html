@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    /* Set additional styling options for the columns*/
+    .column {
+    float: left;
+    width: 50%;
+    }
+
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+    </style>
+
+<div class="row">
+    <div class="column">
+        <body>
+            <!-- <form action="#" method="post" id="waypoint_payload"> -->
+                <h2>Waypoint Payload</h2>
+                <input type="button" value="add Row" onclick="addRow()"></input>
+                <!-- <input type="submit" name="Submit" id="waypoint_payload"></input> -->
+                <table id="addTable" width="200px" border="1">
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text"></input></td>
+                        <td><input type="text"></input></td>
+                    </tr>
+                </table>
+                <script type="text/javascript">
+                    function addRow() {
+                        var table = document.getElementById("addTable");
+                        var rowCount = table.rows.length;
+                        var addRow = table.insertRow(rowCount);
+                        var cell1 = addRow.insertCell(0);
+                        cell1.innerHTML = rowCount + 1;
+                        var cell2 = addRow.insertCell(1);
+                        var element1 = document.createElement("input");
+                        var cell3 = addRow.insertCell(1);
+                        var element2 = document.createElement("input");
+                        element1.type = "text";
+                        element1.name = "taxtbox";
+                        element2.type = "text";
+                        element2.name = "taxtbox";
+                        cell2.appendChild(element1);
+                        cell3.appendChild(element2);
+                    }
+                </script>
+            <!-- </form> -->
+            <!-- <script type="text/javascript">
+                $(document).on('submit','#waypoint_payload',function(e)
+                            {
+                console.log('waypoint_payload submitted');
+                e.preventDefault();
+                $.ajax({
+                    type:'POST',
+                    url:'/',
+                    data:{
+                        waypoint_count:$("#waypoint_count").val()
+                    },
+                    success:function()
+                    {
+                    alert('Data Sent:' + waypoint_count);
+                    }
+                })
+                });
+            </script> -->
+        </body>
+    </div>
+
+    <div class="column">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary">Left</button>
+            <button type="button" class="btn btn-primary">Middle</button>
+            <button type="button" class="btn btn-primary">Right</button>
+        </div>
+        <form action="#" method="post" id="waypoint_count">
+            <input type="text" name="waypoint_count" value={{default_count}} id="waypoint_count_value">
+            <input type="submit" value="submit">
+        </form>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                crossorigin="anonymous"></script>
+        
+        <script type="text/javascript">
+            $(document).on('submit','#waypoint_count_value',function(e)
+            {
+                console.log('waypoint_count submitted');
+                e.preventDefault();
+                $.ajax({
+                    type:'POST',
+                    url:'/',
+                    data:{
+                        waypoint_count:$("#waypoint_count").val()
+                    },
+                    success:function(){
+                        alert('Data Sent');
+                    }
+                })
+            });
+        </script>
+    </div>
+
+</div>
+
+{% endblock %}

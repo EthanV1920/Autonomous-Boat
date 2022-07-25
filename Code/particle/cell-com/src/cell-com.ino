@@ -33,16 +33,30 @@ void myHandler(const char *eventName, const char *data){
   Serial.print(parser.addString(data));
   parser.parse();
   Serial.print(data);
+  Serial.print("\n");
 
-  String temp;
-  int waypoint_count = parser.getReference().key("waypoint_count").valueInt();
+  int waypoint_count = parser.getReference().key("waypoint_status").key("waypoint_count").valueInt();
 
+  // print_waypoint(waypoint_count, data, parser);
   for(int i = 0; i <= waypoint_count; i++){
-    temp = parser.getReference().key("waypoints").key("long"+ String(i)).valueString();
+    String temp = parser.getReference().key("waypoints").key("long"+ String(i)).valueString();
     // parser.getOuterValueByKey("waypoint_count", temp);
     Serial.print(temp);
+    Serial.print("\n");
+    digitalWrite(led, HIGH);
     delay(100);
+    digitalWrite(led, LOW);
     Particle.publish("DATA", temp, PRIVATE);
   }
 }
 
+// void print_waypoint(int waypoint_count, const char *data, JsonParser parser){
+//   for(int i = 0; i <= waypoint_count; i++){
+//     String temp;
+//     temp = parser.getReference().key("waypoints").key("long"+ String(i)).valueString();
+//     // parser.getOuterValueByKey("waypoint_count", temp);
+//     Serial.print(temp + "\n");
+//     // delay(100);
+//     Particle.publish("DATA", temp, PRIVATE);
+//   }
+// }
